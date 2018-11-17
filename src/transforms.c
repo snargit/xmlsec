@@ -8,7 +8,7 @@
  * Copyright (C) 2002-2016 Aleksey Sanin <aleksey@aleksey.com>. All Rights Reserved.
  */
 /**
- * SECTION:transforms 
+ * SECTION:transforms
  * @Short_description: Transform object functions.
  * @Stability: Stable
  *
@@ -772,7 +772,7 @@ xmlSecTransformCtxSetUri(xmlSecTransformCtxPtr ctx, const xmlChar* uri, xmlNodeP
             xmlSecMallocError(size * sizeof(xmlChar), NULL);
             return(-1);
         }
-        ret = xmlStrPrintf(buf, size, tmpl, xptr + 1);
+        ret = xmlStrPrintf(buf, (int)size, tmpl, xptr + 1);
         if(ret < 0) {
             xmlSecXmlError("xmlStrPrintf", NULL);
              xmlFree(buf);
@@ -2516,7 +2516,7 @@ xmlSecTransformIOBufferRead(xmlSecTransformIOBufferPtr buffer,
                             xmlSecTransformGetName(buffer->transform));
         return(-1);
     }
-    return(size);
+    return((int)size);
 }
 
 static int
@@ -2536,7 +2536,7 @@ xmlSecTransformIOBufferWrite(xmlSecTransformIOBufferPtr buffer,
                             xmlSecTransformGetName(buffer->transform));
         return(-1);
     }
-    return(size);
+    return((int)size);
 }
 
 static int

@@ -306,7 +306,7 @@ xmlSecCryptoDLLibrariesListFindByName(xmlSecPtrListPtr list, const xmlChar* name
     for(i = 0; i < size; ++i) {
         lib = (xmlSecCryptoDLLibraryPtr)xmlSecPtrListGetItem(list, i);
         if((lib != NULL) && (lib->name != NULL) && (xmlStrcmp(lib->name, name) == 0)) {
-            return(i);
+            return((int)i);
         }
     }
     return(-1);

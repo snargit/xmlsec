@@ -78,7 +78,7 @@ static int              xmlSecXslProcess                        (xmlSecXsltCtxPt
                                                                  xmlSecBufferPtr out);
 static xmlDocPtr        xmlSecXsApplyStylesheet                 (xmlSecXsltCtxPtr ctx,
                                                                  xmlDocPtr doc);
-                                                                 
+
 static xmlSecTransformKlass xmlSecXsltKlass = {
     /* klass/object sizes */
     sizeof(xmlSecTransformKlass),               /* xmlSecSize klassSize */
@@ -135,14 +135,14 @@ void xmlSecTransformXsltShutdown(void) {
  * xmlSecTransformXsltSetDefaultSecurityPrefs:
  * @sec: the new security preferences
  *
- * Sets the new default security preferences. The xmlsec default security policy is 
+ * Sets the new default security preferences. The xmlsec default security policy is
  * to disable everything.
  */
 XMLSEC_EXPORT void
 xmlSecTransformXsltSetDefaultSecurityPrefs(xsltSecurityPrefsPtr sec) {
     xmlSecAssert(sec != NULL);
     xmlSecAssert(g_xslt_default_security_prefs != NULL);
-    
+
     /* copy prefs */
     XMLSEC_XSLT_COPY_SEC_PREF(sec, g_xslt_default_security_prefs, XSLT_SECPREF_READ_FILE);
     XMLSEC_XSLT_COPY_SEC_PREF(sec, g_xslt_default_security_prefs, XSLT_SECPREF_WRITE_FILE);
@@ -200,7 +200,7 @@ xmlSecXsltInitialize(xmlSecTransformPtr transform) {
 
     /* initialize context */
     memset(ctx, 0, sizeof(xmlSecXsltCtx));
-    
+
     /* done */
     return(0);
 }
@@ -322,7 +322,7 @@ xmlSecXsltPushBin(xmlSecTransformPtr transform, const xmlSecByte* data,
 
     /* push data to the input buffer */
     if((data != NULL) && (dataSize > 0)) {
-        ret = xmlParseChunk(ctx->parserCtx, (const char*)data, dataSize, 0);
+        ret = xmlParseChunk(ctx->parserCtx, (const char*)data, (int)dataSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctx->parserCtx,
                                   xmlSecTransformGetName(transform),
@@ -514,7 +514,7 @@ xmlSecXsApplyStylesheet(xmlSecXsltCtxPtr ctx, xmlDocPtr doc) {
     xsltTransformContextPtr xsltCtx = NULL;
     xmlDocPtr res = NULL;
     int ret;
-    
+
     xmlSecAssert2(ctx != NULL, NULL);
     xmlSecAssert2(ctx->xslt != NULL, NULL);
     xmlSecAssert2(doc != NULL, NULL);
@@ -537,10 +537,10 @@ xmlSecXsApplyStylesheet(xmlSecXsltCtxPtr ctx, xmlDocPtr doc) {
         xmlSecXsltError("xsltApplyStylesheetUser", ctx->xslt, NULL);
         goto done;
     }
-    
+
 done:
     if(xsltCtx != NULL) xsltFreeTransformContext(xsltCtx);
-    return res;    
+    return res;
 }
 
 

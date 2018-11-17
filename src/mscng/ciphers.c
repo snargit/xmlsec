@@ -764,7 +764,7 @@ xmlSecMSCngGCMBlockCipherCtxUpdate(xmlSecMSCngBlockCipherCtxPtr ctx,
          * we don't try to decrypt it, we leave at least 16 bytes in the buffer
          * until we know we're processing the last one */
         inSize = ((xmlSecBufferGetSize(in) - xmlSecMSCngAesGcmTagLengthInBytes) / XMLSEC_SIZE_BAD_CAST(ctx->dwBlockLen)) * XMLSEC_SIZE_BAD_CAST(ctx->dwBlockLen);
-        if (inSize < ctx->dwBlockLen) {
+        if (inSize < XMLSEC_SIZE_BAD_CAST(ctx->dwBlockLen)) {
             return 0;
         }
     }
@@ -799,7 +799,7 @@ xmlSecMSCngGCMBlockCipherCtxUpdate(xmlSecMSCngBlockCipherCtxPtr ctx,
 
         /* check if we really have encrypted the numbers of bytes that we
         * requested */
-        if(dwCLen != inSize) {
+        if(dwCLen != (DWORD)inSize) {
             xmlSecInternalError2("BCryptEncrypt", cipherName, "size=%ld",
                 dwCLen);
             return(-1);
@@ -824,7 +824,7 @@ xmlSecMSCngGCMBlockCipherCtxUpdate(xmlSecMSCngBlockCipherCtxPtr ctx,
 
         /* check if we really have decrypted the numbers of bytes that we
         * requested */
-        if(dwCLen != inSize) {
+        if(dwCLen != (DWORD)inSize) {
             xmlSecInternalError2("BCryptDecrypt", cipherName, "size=%ld",
                 dwCLen);
             return(-1);
@@ -840,7 +840,7 @@ xmlSecMSCngGCMBlockCipherCtxUpdate(xmlSecMSCngBlockCipherCtxPtr ctx,
     }
 
     /* remove the processed data from input */
-    ret = xmlSecBufferRemoveHead(in, dwCLen);
+    ret = xmlSecBufferRemoveHead(in, XMLSEC_SIZE_BAD_CAST(dwCLen));
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferRemoveHead", cipherName, "size=%d",
             dwCLen);
@@ -1056,7 +1056,7 @@ xmlSecMSCngGCMBlockCipherCtxFinal(xmlSecMSCngBlockCipherCtxPtr ctx,
 
         /* check if we really have encrypted the numbers of bytes that we
         * requested */
-        if(dwCLen != inBufSize) {
+        if(dwCLen != (DWORD)inBufSize) {
             xmlSecInternalError2("BCryptEncrypt", cipherName, "size=%ld",
                 dwCLen);
             return(-1);
@@ -1110,7 +1110,7 @@ xmlSecMSCngGCMBlockCipherCtxFinal(xmlSecMSCngBlockCipherCtxPtr ctx,
 
         /* check if we really have decrypted the numbers of bytes that we
         * requested */
-        if(dwCLen != inBufSize) {
+        if(dwCLen != (DWORD)inBufSize) {
             xmlSecInternalError2("BCryptDecrypt", cipherName, "size=%ld",
                 dwCLen);
             return(-1);

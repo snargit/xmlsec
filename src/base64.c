@@ -263,7 +263,7 @@ xmlSecBase64CtxUpdate(xmlSecBase64CtxPtr ctx,
         }
     }
 
-    return(outResSize);
+    return((int)outResSize);
 }
 
 /**
@@ -305,7 +305,7 @@ xmlSecBase64CtxFinal(xmlSecBase64CtxPtr ctx,
     if((outResSize + 1) < outSize) {
         out[outResSize] = '\0';
     }
-    return(outResSize);
+    return((int)outResSize);
 }
 
 static xmlSecBase64Status

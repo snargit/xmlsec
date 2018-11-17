@@ -601,7 +601,7 @@ xmlSecBufferIOWrite(xmlSecBufferPtr buf, const xmlSecByte *data, xmlSecSize size
         return(-1);
     }
 
-    return(size);
+    return((int)size);
 }
 
 static int
