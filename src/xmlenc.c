@@ -823,7 +823,7 @@ xmlSecEncCtxEncDataNodeWrite(xmlSecEncCtxPtr encCtx) {
 
         xmlNodeSetContentLen(encCtx->cipherValueNode,
                             xmlSecBufferGetData(encCtx->result),
-                            xmlSecBufferGetSize(encCtx->result));
+                            (int)xmlSecBufferGetSize(encCtx->result));
         encCtx->resultReplaced = 1;
     }
 

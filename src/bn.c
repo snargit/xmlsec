@@ -247,7 +247,7 @@ xmlSecBnFromString(xmlSecBnPtr bn, const xmlChar* str, xmlSecSize base) {
             return (-1);
         }
 
-        ret = xmlSecBnMul(bn, base);
+        ret = xmlSecBnMul(bn, (int)base);
         if(ret < 0) {
             xmlSecInternalError2("xmlSecBnMul", NULL, "base=%d", base);
             return (-1);
@@ -367,7 +367,7 @@ xmlSecBnToString(xmlSecBnPtr bn, xmlSecSize base) {
     memset(res, 0, len + 1);
 
     for(i = 0; (xmlSecBufferGetSize(&bn2) > 0) && (i < len); i++) {
-        if(xmlSecBnDiv(&bn2, base, &nn) < 0) {
+        if(xmlSecBnDiv(&bn2, (int)base, &nn) < 0) {
             xmlSecInternalError2("xmlSecBnDiv", NULL, "base=%d", base);
             xmlFree(res);
             xmlSecBnFinalize(&bn2);
