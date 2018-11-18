@@ -400,7 +400,7 @@ xmlSecMSCngHmacExecute(xmlSecTransformPtr transform, int last, xmlSecTransformCt
         if(inSize > 0) {
             status = BCryptHashData(ctx->hHash,
                 xmlSecBufferGetData(in),
-                inSize,
+                (ULONG)inSize,
                 0);
             if(status != STATUS_SUCCESS) {
                 xmlSecMSCngNtError("BCryptHashData",

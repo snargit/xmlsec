@@ -73,7 +73,7 @@ xmlSecMSCngKWDes3GenerateRandom(void * context, xmlSecByte * out,
     status = BCryptGenRandom(
         NULL,
         (PBYTE)out,
-        outSize,
+        (ULONG)outSize,
         BCRYPT_USE_SYSTEM_PREFERRED_RNG);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptGenRandom", NULL, status);
@@ -162,7 +162,7 @@ xmlSecMSCngKWDes3Sha1(void * context, const xmlSecByte * in, xmlSecSize inSize,
     /* hash */
     status = BCryptHashData(hHash,
         (PBYTE)in,
-        inSize,
+        (ULONG)inSize,
         0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptHashData", NULL, status);
@@ -277,7 +277,7 @@ xmlSecMSCngKWDes3BlockEncrypt(void * context, const xmlSecByte * iv,
     blobHeader = (BCRYPT_KEY_DATA_BLOB_HEADER*)xmlSecBufferGetData(&blob);
     blobHeader->dwMagic = BCRYPT_KEY_DATA_BLOB_MAGIC;
     blobHeader->dwVersion = BCRYPT_KEY_DATA_BLOB_VERSION1;
-    blobHeader->cbKeyData = xmlSecBufferGetSize(&ctx->keyBuffer);
+    blobHeader->cbKeyData = (ULONG)xmlSecBufferGetSize(&ctx->keyBuffer);
     memcpy(xmlSecBufferGetData(&blob) + sizeof(BCRYPT_KEY_DATA_BLOB_HEADER),
         xmlSecBufferGetData(&ctx->keyBuffer),
         xmlSecBufferGetSize(&ctx->keyBuffer));
@@ -290,7 +290,7 @@ xmlSecMSCngKWDes3BlockEncrypt(void * context, const xmlSecByte * iv,
         pbKeyObject,
         cbKeyObject,
         xmlSecBufferGetData(&blob),
-        xmlSecBufferGetSize(&blob),
+        (ULONG)xmlSecBufferGetSize(&blob),
         0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptImportKey", NULL, status);
@@ -330,15 +330,15 @@ xmlSecMSCngKWDes3BlockEncrypt(void * context, const xmlSecByte * iv,
 
     memcpy(xmlSecBufferGetData(&ivCopy), iv, ivSize);
 
-    cbData = inSize;
+    cbData = (DWORD)inSize;
     status = BCryptEncrypt(hKey,
         (PUCHAR)in,
-        inSize,
+        (ULONG)inSize,
         NULL,
         xmlSecBufferGetData(&ivCopy),
         ivSize,
         out,
-        outSize,
+        (ULONG)outSize,
         &cbData,
         0);
     if(status != STATUS_SUCCESS) {
@@ -442,7 +442,7 @@ xmlSecMSCngKWDes3BlockDecrypt(void * context, const xmlSecByte * iv,
     blobHeader = (BCRYPT_KEY_DATA_BLOB_HEADER*)xmlSecBufferGetData(&blob);
     blobHeader->dwMagic = BCRYPT_KEY_DATA_BLOB_MAGIC;
     blobHeader->dwVersion = BCRYPT_KEY_DATA_BLOB_VERSION1;
-    blobHeader->cbKeyData = xmlSecBufferGetSize(&ctx->keyBuffer);
+    blobHeader->cbKeyData = (ULONG)xmlSecBufferGetSize(&ctx->keyBuffer);
     memcpy(xmlSecBufferGetData(&blob) + sizeof(BCRYPT_KEY_DATA_BLOB_HEADER),
         xmlSecBufferGetData(&ctx->keyBuffer),
         xmlSecBufferGetSize(&ctx->keyBuffer));
@@ -455,7 +455,7 @@ xmlSecMSCngKWDes3BlockDecrypt(void * context, const xmlSecByte * iv,
         pbKeyObject,
         cbKeyObject,
         xmlSecBufferGetData(&blob),
-        xmlSecBufferGetSize(&blob),
+        (ULONG)xmlSecBufferGetSize(&blob),
         0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptImportKey", NULL, status);
@@ -485,15 +485,15 @@ xmlSecMSCngKWDes3BlockDecrypt(void * context, const xmlSecByte * iv,
         memcpy(out, in, inSize);
     }
 
-    cbData = inSize;
+    cbData = (DWORD)inSize;
     status = BCryptDecrypt(hKey,
         (PUCHAR)in,
-        inSize,
+        (ULONG)inSize,
         NULL,
         (PUCHAR)iv,
         ivSize,
         out,
-        inSize,
+        (ULONG)inSize,
         &cbData,
         0);
     if(status != STATUS_SUCCESS) {

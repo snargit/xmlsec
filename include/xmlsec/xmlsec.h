@@ -40,18 +40,10 @@ typedef void*                                   xmlSecPtr;
  * but it will break ABI (todo).
  */
 #ifdef XMLSEC_NO_SIZE_T
-#ifdef _WIN32
-#ifdef _WIN64
-#define xmlSecSize                              unsigned __int64
-#else
-#define xmlSecSize                              unsigned __int32
-#endif
-#else // _WIN32
-#ifdef __LP64__
+#if (defined(_WIN64) || defined(__LP64__))
 #define xmlSecSize                              unsigned long long
 #else
 #define xmlSecSize                              unsigned int
-#endif
 #endif
 #else  /* XMLSEC_NO_SIZE_T */
 #define xmlSecSize                              size_t

@@ -392,7 +392,7 @@ static int xmlSecMSCngSignatureVerify(xmlSecTransformPtr transform,
         ctx->pbHash,
         ctx->cbHash,
         (PBYTE)data,
-        dataSize,
+        (ULONG)dataSize,
         infoFlags);
     if(status != STATUS_SUCCESS) {
         if(status == STATUS_INVALID_SIGNATURE) {
@@ -520,7 +520,7 @@ xmlSecMSCngSignatureExecute(xmlSecTransformPtr transform, int last, xmlSecTransf
             status = BCryptHashData(
                 ctx->hHash,
                 (PBYTE)xmlSecBufferGetData(&transform->inBuf),
-                inSize,
+                (ULONG)inSize,
                 0);
             if(status != STATUS_SUCCESS) {
                 xmlSecMSCngNtError("BCryptHashData",
