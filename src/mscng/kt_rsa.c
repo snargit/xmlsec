@@ -229,7 +229,8 @@ xmlSecMSCngRsaPkcs1OaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxP
                 xmlSecTransformGetName(transform));
             return(-1);
         }
-        dwInLen = inSize;
+
+        dwInLen = (DWORD)inSize;
 
         inBuf   = xmlSecBufferGetData(in);
         outBuf  = xmlSecBufferGetData(out);
@@ -245,12 +246,12 @@ xmlSecMSCngRsaPkcs1OaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxP
         if(xmlSecTransformCheckId(transform, xmlSecMSCngTransformRsaPkcs1Id)) {
             status = BCryptEncrypt(hPubKey,
                 inBuf,
-                inSize,
+                (ULONG)inSize,
                 NULL,
                 NULL,
                 0,
                 outBuf,
-                outSize,
+                (ULONG)outSize,
                 &dwOutLen,
                 BCRYPT_PAD_PKCS1);
             if(status != STATUS_SUCCESS) {
@@ -262,15 +263,15 @@ xmlSecMSCngRsaPkcs1OaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxP
             BCRYPT_OAEP_PADDING_INFO paddingInfo;
             paddingInfo.pszAlgId = BCRYPT_SHA1_ALGORITHM;
             paddingInfo.pbLabel = xmlSecBufferGetData(&(ctx->oaepParams));
-            paddingInfo.cbLabel = xmlSecBufferGetSize(&(ctx->oaepParams));
+            paddingInfo.cbLabel = (ULONG)xmlSecBufferGetSize(&(ctx->oaepParams));
             status = BCryptEncrypt(hPubKey,
                 inBuf,
-                inSize,
+                (ULONG)inSize,
                 &paddingInfo,
                 NULL,
                 0,
                 outBuf,
-                outSize,
+                (ULONG)outSize,
                 &dwOutLen,
                 BCRYPT_PAD_OAEP);
             if(status != STATUS_SUCCESS) {
@@ -283,7 +284,7 @@ xmlSecMSCngRsaPkcs1OaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxP
             return(-1);
         }
     } else {
-        dwOutLen = inSize;
+        dwOutLen = (DWORD)inSize;
 
         ret = xmlSecBufferSetSize(out, inSize);
         if(ret < 0) {
@@ -306,10 +307,10 @@ xmlSecMSCngRsaPkcs1OaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxP
         if(xmlSecTransformCheckId(transform, xmlSecMSCngTransformRsaPkcs1Id)) {
             securityStatus = NCryptDecrypt(hPrivKey,
                 inBuf,
-                inSize,
+                (DWORD)inSize,
                 NULL,
                 outBuf,
-                inSize,
+                (DWORD)inSize,
                 &dwOutLen,
                 NCRYPT_PAD_PKCS1_FLAG);
             if(securityStatus != ERROR_SUCCESS) {
@@ -321,14 +322,14 @@ xmlSecMSCngRsaPkcs1OaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxP
             BCRYPT_OAEP_PADDING_INFO paddingInfo;
             paddingInfo.pszAlgId = BCRYPT_SHA1_ALGORITHM;
             paddingInfo.pbLabel = xmlSecBufferGetData(&(ctx->oaepParams));
-            paddingInfo.cbLabel = xmlSecBufferGetSize(&(ctx->oaepParams));
+            paddingInfo.cbLabel = (ULONG)xmlSecBufferGetSize(&(ctx->oaepParams));
 
             securityStatus = NCryptDecrypt(hPrivKey,
                 inBuf,
-                inSize,
+                (DWORD)inSize,
                 &paddingInfo,
                 outBuf,
-                inSize,
+                (DWORD)inSize,
                 &dwOutLen,
                 NCRYPT_PAD_OAEP_FLAG);
             if(securityStatus != ERROR_SUCCESS) {

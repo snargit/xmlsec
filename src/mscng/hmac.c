@@ -192,8 +192,8 @@ xmlSecMSCngHmacNodeRead(xmlSecTransformPtr transform, xmlNodePtr node, xmlSecTra
             xmlFree(content);
         }
 
-	/* 80 is a minimum value from
-	 * <https://www.w3.org/TR/xmldsig-core1/#sec-SignatureMethod> */
+    /* 80 is a minimum value from
+     * <https://www.w3.org/TR/xmldsig-core1/#sec-SignatureMethod> */
         if((int)ctx->truncationLength < 80) {
             xmlSecInvalidNodeContentError(cur, xmlSecTransformGetName(transform),
                                           "HMAC output length is too small");
@@ -295,7 +295,7 @@ xmlSecMSCngHmacSetKey(xmlSecTransformPtr transform, xmlSecKeyPtr key) {
         NULL,
         0,
         (PBYTE)xmlSecBufferGetData(buffer),
-        xmlSecBufferGetSize(buffer),
+        (ULONG)xmlSecBufferGetSize(buffer),
         0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptCreateHash",
