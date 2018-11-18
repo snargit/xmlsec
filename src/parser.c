@@ -134,7 +134,7 @@ xmlSecParserFinalize(xmlSecTransformPtr transform) {
     if(ctx->parserCtx != NULL) {
         if(ctx->parserCtx->myDoc != NULL) {
             xmlFreeDoc(ctx->parserCtx->myDoc);
-	    ctx->parserCtx->myDoc = NULL;
+        ctx->parserCtx->myDoc = NULL;
         }
         xmlFreeParserCtxt(ctx->parserCtx);
     }
@@ -180,7 +180,7 @@ xmlSecParserPushBin(xmlSecTransformPtr transform, const xmlSecByte* data,
 
     /* push data to the input buffer */
     if((data != NULL) && (dataSize > 0)) {
-        ret = xmlParseChunk(ctx->parserCtx, (const char*)data, dataSize, 0);
+        ret = xmlParseChunk(ctx->parserCtx, (const char*)data, (int)dataSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctx->parserCtx,
                                   xmlSecTransformGetName(transform),
@@ -472,7 +472,7 @@ xmlSecParseMemoryExt(const xmlSecByte *prefix, xmlSecSize prefixSize,
 
     /* prefix */
     if((prefix != NULL) && (prefixSize > 0)) {
-        ret = xmlParseChunk(ctxt, (const char*)prefix, prefixSize, 0);
+        ret = xmlParseChunk(ctxt, (const char*)prefix, (int)prefixSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctxt, NULL,
                                   "chunkSize=%d", prefixSize);
@@ -483,7 +483,7 @@ xmlSecParseMemoryExt(const xmlSecByte *prefix, xmlSecSize prefixSize,
 
     /* buffer */
     if((buffer != NULL) && (bufferSize > 0)) {
-        ret = xmlParseChunk(ctxt, (const char*)buffer, bufferSize, 0);
+        ret = xmlParseChunk(ctxt, (const char*)buffer, (int)bufferSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctxt, NULL,
                                   "chunkSize=%d", bufferSize);
@@ -494,7 +494,7 @@ xmlSecParseMemoryExt(const xmlSecByte *prefix, xmlSecSize prefixSize,
 
     /* postfix */
     if((postfix != NULL) && (postfixSize > 0)) {
-        ret = xmlParseChunk(ctxt, (const char*)postfix, postfixSize, 0);
+        ret = xmlParseChunk(ctxt, (const char*)postfix, (int)postfixSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctxt, NULL,
                                   "chunkSize=%d", postfixSize);
@@ -543,7 +543,7 @@ xmlSecParseMemory(const xmlSecByte *buffer, xmlSecSize size, int recovery) {
 
     xmlSecAssert2(buffer != NULL, NULL);
 
-    ctxt = xmlCreateMemoryParserCtxt((char*)buffer, size);
+    ctxt = xmlCreateMemoryParserCtxt((char*)buffer, (int)size);
     if (ctxt == NULL) {
         xmlSecXmlError("xmlCreateMemoryParserCtxt", NULL);
         return(NULL);
@@ -559,7 +559,7 @@ xmlSecParseMemory(const xmlSecByte *buffer, xmlSecSize size, int recovery) {
         if(ctxt->myDoc != NULL) {
             xmlFreeDoc(ctxt->myDoc);
             ctxt->myDoc = NULL;
-        }	
+        }
         xmlFreeParserCtxt(ctxt);
         return(NULL);
     }
