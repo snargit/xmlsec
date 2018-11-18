@@ -9,7 +9,7 @@
  */
 /**
  * SECTION:x509
- * @Short_description: X509 certificates implementation for Microsoft Cryptography API: Next Generation (CNG). 
+ * @Short_description: X509 certificates implementation for Microsoft Cryptography API: Next Generation (CNG).
  * @Stability: Stable
  *
  */
@@ -171,7 +171,7 @@ xmlSecMSCngX509CertDerRead(const xmlSecByte* buf, xmlSecSize size) {
     xmlSecAssert2(buf != NULL, NULL);
     xmlSecAssert2(size > 0, NULL);
 
-    cert = CertCreateCertificateContext(X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, buf, size);
+    cert = CertCreateCertificateContext(X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, buf, (DWORD)size);
     if(cert == NULL) {
         xmlSecMSCngLastError("CertCreateCertificateContext", NULL);
         return(NULL);
@@ -489,9 +489,9 @@ xmlSecMSCngX509IssuerSerialNodeRead(xmlSecKeyDataPtr data, xmlNodePtr node,
             return(-1);
         }
 
-	xmlFree(issuerSerial);
-	xmlFree(issuerName);
-	return(0);
+    xmlFree(issuerSerial);
+    xmlFree(issuerName);
+    return(0);
     }
 
     ret = xmlSecMSCngKeyDataX509AdoptCert(data, cert);
@@ -581,7 +581,7 @@ xmlSecMSCngX509CrlDerRead(xmlSecByte* buf, xmlSecSize size,
     xmlSecAssert2(keyInfoCtx != NULL, NULL);
     xmlSecAssert2(size > 0, NULL);
 
-    crl = CertCreateCRLContext(X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, buf, size);
+    crl = CertCreateCRLContext(X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, buf, (DWORD)size);
 
     if(crl == NULL) {
         xmlSecMSCngLastError("CertCreateCRLContext", NULL);
@@ -992,8 +992,8 @@ xmlSecMSCngASN1IntegerWrite(xmlNodePtr node, PCRYPT_INTEGER_BLOB num) {
 
     ret = xmlSecBnInitialize(&bn, num->cbData + 1);
     if(ret < 0) {
-	xmlSecInternalError2("xmlSecBnInitialize", NULL, "size=%ld",
-	    num->cbData + 1);
+    xmlSecInternalError2("xmlSecBnInitialize", NULL, "size=%ld",
+        num->cbData + 1);
         return(-1);
     }
 

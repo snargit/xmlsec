@@ -9,7 +9,7 @@
  */
 /**
  * SECTION:x509vfy
- * @Short_description: X509 certificates verification support functions for Microsoft Cryptography API: Next Generation (CNG). 
+ * @Short_description: X509 certificates verification support functions for Microsoft Cryptography API: Next Generation (CNG).
  * @Stability: Private
  *
  */
@@ -112,7 +112,7 @@ xmlSecMSCngX509StoreAdoptKeyStore(xmlSecKeyDataStorePtr store, HCERTSTORE keySto
 
     ret = CertAddStoreToCollection(ctx->trusted, keyStore, CERT_PHYSICAL_STORE_ADD_ENABLE_FLAG, 2);
     if(ret != TRUE) {
-	xmlSecMSCngLastError("CertAddStoreToCollection",
+    xmlSecMSCngLastError("CertAddStoreToCollection",
             xmlSecKeyDataStoreGetName(store));
         return(-1);
     }
@@ -880,7 +880,7 @@ xmlSecMSCngX509FindCertByIssuer(HCERTSTORE store, LPTSTR wcIssuer,
     xmlSecAssert2(wcIssuer != NULL, NULL);
     xmlSecAssert2(issuerSerialBn != NULL, NULL);
 
-    certInfo.SerialNumber.cbData = xmlSecBnGetSize(issuerSerialBn);
+    certInfo.SerialNumber.cbData = (DWORD)xmlSecBnGetSize(issuerSerialBn);
     certInfo.SerialNumber.pbData = xmlSecBnGetData(issuerSerialBn);
 
 
@@ -1060,7 +1060,7 @@ xmlSecMSCngX509FindCert(HCERTSTORE store, xmlChar* subjectName,
                         NULL);
         xmlFree(binSki);
 
-	return(cert);
+    return(cert);
     }
 
     return(NULL);
