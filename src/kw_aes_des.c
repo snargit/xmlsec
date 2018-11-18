@@ -28,7 +28,7 @@
 
 #ifndef XMLSEC_NO_DES
 
-static int      xmlSecKWDes3BufferReverse                       (xmlSecByte *buf, 
+static int      xmlSecKWDes3BufferReverse                       (xmlSecByte *buf,
                                                                  xmlSecSize size);
 
 /********************************************************************
@@ -147,13 +147,13 @@ xmlSecKWDes3Encode(xmlSecKWDes3Id kwDes3Id, void *context,
     }
 
     s = ret;
-    return(s);
+    return((int)s);
 }
 
 int
 xmlSecKWDes3Decode(xmlSecKWDes3Id kwDes3Id, void *context,
                   const xmlSecByte *in, xmlSecSize inSize,
-                  xmlSecByte *out, xmlSecSize outSize) 
+                  xmlSecByte *out, xmlSecSize outSize)
 {
     xmlSecByte sha1[XMLSEC_KW_DES3_SHA_DIGEST_LENGTH];
     xmlSecBufferPtr tmp;
@@ -174,10 +174,10 @@ xmlSecKWDes3Decode(xmlSecKWDes3Id kwDes3Id, void *context,
         xmlSecInternalError2("xmlSecBufferCreate", NULL, "inSize=%d", (int)inSize);
         return(-1);
     }
-    
+
     ret = kwDes3Id->decrypt(context,
                            xmlSecKWDes3Iv, sizeof(xmlSecKWDes3Iv),
-                           in, inSize, 
+                           in, inSize,
                            xmlSecBufferGetData(tmp), xmlSecBufferGetMaxSize(tmp));
     if((ret < 0) || (ret < XMLSEC_KW_DES3_IV_LENGTH)) {
         xmlSecInternalError("kwDes3Id->decrypt", NULL);
@@ -226,11 +226,11 @@ xmlSecKWDes3Decode(xmlSecKWDes3Id kwDes3Id, void *context,
 
     /* done */
     xmlSecBufferDestroy(tmp);
-    return(s);
+    return((int)s);
 }
 
 static int
-xmlSecKWDes3BufferReverse(xmlSecByte *buf, xmlSecSize size) 
+xmlSecKWDes3BufferReverse(xmlSecByte *buf, xmlSecSize size)
 {
     xmlSecByte * p;
     xmlSecByte ch;
@@ -353,7 +353,7 @@ xmlSecKWAesEncode(xmlSecKWAesId kwAesId, void *context,
     }
     memcpy(out, xmlSecKWAesMagicBlock, XMLSEC_KW_AES_MAGIC_BLOCK_SIZE);
 
-    N = (inSize / 8);
+    N = (int)(inSize / (xmlSecSize)8);
     if(N == 1) {
         ret = kwAesId->encrypt(out, inSize + XMLSEC_KW_AES_MAGIC_BLOCK_SIZE, out, outSize, context);
         if(ret < 0) {
@@ -381,7 +381,7 @@ xmlSecKWAesEncode(xmlSecKWAesId kwAesId, void *context,
         }
     }
 
-    return(inSize + 8);
+    return((int)(inSize + (xmlSecSize)8));
 }
 
 int
@@ -407,7 +407,7 @@ xmlSecKWAesDecode(xmlSecKWAesId kwAesId, void *context,
         memcpy(out, in, inSize);
     }
 
-    N = (inSize / 8) - 1;
+    N = (int)((inSize / (xmlSecSize)8) - (xmlSecSize)1);
     if(N == 1) {
         ret = kwAesId->decrypt(out, inSize, out, outSize, context);
         if(ret < 0) {
@@ -445,7 +445,7 @@ xmlSecKWAesDecode(xmlSecKWAesId kwAesId, void *context,
 
     /* get rid of magic block */
     memmove(out, out + XMLSEC_KW_AES_MAGIC_BLOCK_SIZE, inSize - XMLSEC_KW_AES_MAGIC_BLOCK_SIZE);
-    return(inSize - XMLSEC_KW_AES_MAGIC_BLOCK_SIZE);
+    return((int)(inSize - XMLSEC_KW_AES_MAGIC_BLOCK_SIZE));
 }
 
 #endif /* XMLSEC_NO_AES */

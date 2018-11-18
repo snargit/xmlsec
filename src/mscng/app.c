@@ -202,7 +202,8 @@ xmlSecMSCngAppKeyLoadMemory(const xmlSecByte* data, xmlSecSize dataSize, xmlSecK
     UNREFERENCED_PARAMETER(pwdCallback);
     UNREFERENCED_PARAMETER(pwdCallbackCtx);
 
-    pCert = CertCreateCertificateContext(X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, data, dataSize);
+    pCert = CertCreateCertificateContext(X509_ASN_ENCODING | PKCS_7_ASN_ENCODING, data,
+        (DWORD)dataSize);
     if(pCert == NULL) {
         xmlSecMSCngLastError("CertCreateCertificateContext", NULL);
         goto done;
@@ -428,7 +429,7 @@ xmlSecMSCngAppPkcs12LoadMemory(const xmlSecByte* data, xmlSecSize dataSize, cons
 
     memset(&pfx, 0, sizeof(pfx));
     pfx.pbData = (BYTE *)data;
-    pfx.cbData = dataSize;
+    pfx.cbData = (DWORD)dataSize;
     ret = PFXIsPFXBlob(&pfx);
     if(ret == FALSE) {
         xmlSecMSCngLastError("PFXIsPFXBlob", NULL);
@@ -639,7 +640,7 @@ xmlSecMSCngAppKeysMngrCertLoadMemory(xmlSecKeysMngrPtr mngr, const xmlSecByte* d
             pCert = CertCreateCertificateContext(
                 X509_ASN_ENCODING | PKCS_7_ASN_ENCODING,
                 data,
-                dataSize);
+                (DWORD)dataSize);
             if(pCert == NULL) {
                 xmlSecMSCngLastError("CertCreateCertificateContext", NULL)
                 return(-1);

@@ -309,7 +309,7 @@ xmlSecDSigCtxSign(xmlSecDSigCtxPtr dsigCtx, xmlNodePtr tmpl) {
     /* write signed data to xml */
     xmlNodeSetContentLen(dsigCtx->signValueNode,
                             xmlSecBufferGetData(dsigCtx->result),
-                            xmlSecBufferGetSize(dsigCtx->result));
+                            (int)xmlSecBufferGetSize(dsigCtx->result));
 
     /* set success status and we are done */
     dsigCtx->status = xmlSecDSigStatusSucceeded;
@@ -1419,7 +1419,7 @@ xmlSecDSigReferenceCtxProcessNode(xmlSecDSigReferenceCtxPtr dsigRefCtx, xmlNodeP
         /* write signed data to xml */
         xmlNodeSetContentLen(digestValueNode,
                             xmlSecBufferGetData(dsigRefCtx->result),
-                            xmlSecBufferGetSize(dsigRefCtx->result));
+                            (int)xmlSecBufferGetSize(dsigRefCtx->result));
 
         /* set success status and we are done */
         dsigRefCtx->status = xmlSecDSigStatusSucceeded;

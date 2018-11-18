@@ -666,7 +666,7 @@ xmlSecMSCngKeyDataDsaXmlRead(xmlSecKeyDataId id, xmlSecKeyPtr key,
 
     blobData = xmlSecBufferGetData(&blob);
     dsakey = (BCRYPT_DSA_KEY_BLOB *)blobData;
-    dsakey->cbKey = length;
+    dsakey->cbKey = (ULONG)length;
 
     memset(dsakey->Count, -1, sizeof(dsakey->Count));
     memset(dsakey->Seed, -1, sizeof(dsakey->Seed));
@@ -711,7 +711,7 @@ xmlSecMSCngKeyDataDsaXmlRead(xmlSecKeyDataId id, xmlSecKeyPtr key,
     }
 
     status = BCryptImportKeyPair(hAlg, NULL, lpszBlobType, &hKey, blobData,
-        blobLen, 0);
+        (ULONG)blobLen, 0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptImportKeyPair",
             xmlSecKeyDataKlassGetName(id), status);
@@ -735,7 +735,7 @@ xmlSecMSCngKeyDataDsaXmlRead(xmlSecKeyDataId id, xmlSecKeyPtr key,
     hKey = 0;
     ret = xmlSecKeySetValue(key, keyData);
     if(ret < 0) {
-	xmlSecInternalError("xmlSecKeySetValue",
+    xmlSecInternalError("xmlSecKeySetValue",
             xmlSecKeyDataGetName(keyData));
         goto done;
     }
@@ -953,7 +953,7 @@ xmlSecMSCngKeyDataDsaGenerate(xmlSecKeyDataPtr data, xmlSecSize sizeBits,
     status = BCryptGenerateKeyPair(
         hAlg,
         &hKey,
-        sizeBits,
+        (ULONG)sizeBits,
         0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptGenerateKeyPair", xmlSecKeyDataGetName(data),
@@ -1244,9 +1244,9 @@ xmlSecMSCngKeyDataRsaXmlRead(xmlSecKeyDataId id, xmlSecKeyPtr key,
 
     rsakey = (BCRYPT_RSAKEY_BLOB *)xmlSecBufferGetData(&blob);
     rsakey->Magic = BCRYPT_RSAPUBLIC_MAGIC;
-    rsakey->BitLength = xmlSecBnGetSize(&modulus) * 8;
-    rsakey->cbPublicExp = xmlSecBnGetSize(&exponent);
-    rsakey->cbModulus = xmlSecBnGetSize(&modulus);
+    rsakey->BitLength = (ULONG)xmlSecBnGetSize(&modulus) * 8;
+    rsakey->cbPublicExp = (ULONG)xmlSecBnGetSize(&exponent);
+    rsakey->cbModulus = (ULONG)xmlSecBnGetSize(&modulus);
     offset = sizeof(BCRYPT_RSAKEY_BLOB);
 
     memcpy(xmlSecBufferGetData(&blob) + offset, xmlSecBnGetData(&exponent),
@@ -1270,7 +1270,7 @@ xmlSecMSCngKeyDataRsaXmlRead(xmlSecKeyDataId id, xmlSecKeyPtr key,
     }
 
     status = BCryptImportKeyPair(hAlg, NULL, lpszBlobType, &hKey,
-        xmlSecBufferGetData(&blob), xmlSecBufferGetSize(&blob), 0);
+        xmlSecBufferGetData(&blob), (ULONG)xmlSecBufferGetSize(&blob), 0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptImportKeyPair",
             xmlSecKeyDataKlassGetName(id), status);
@@ -1294,7 +1294,7 @@ xmlSecMSCngKeyDataRsaXmlRead(xmlSecKeyDataId id, xmlSecKeyPtr key,
     hKey = 0;
     ret = xmlSecKeySetValue(key, keyData);
     if(ret < 0) {
-	xmlSecInternalError("xmlSecKeySetValue",
+    xmlSecInternalError("xmlSecKeySetValue",
             xmlSecKeyDataGetName(keyData));
         goto done;
     }
@@ -1457,7 +1457,7 @@ xmlSecMSCngKeyDataRsaGenerate(xmlSecKeyDataPtr data, xmlSecSize sizeBits,
     status = BCryptGenerateKeyPair(
         hAlg,
         &hKey,
-        sizeBits,
+        (ULONG)sizeBits,
         0);
     if(status != STATUS_SUCCESS) {
         xmlSecMSCngNtError("BCryptGenerateKeyPair", xmlSecKeyDataGetName(data),

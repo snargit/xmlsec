@@ -317,7 +317,7 @@ xmlSecMSCngDigestExecute(xmlSecTransformPtr transform,
             status = BCryptHashData(
                 ctx->hHash,
                 (PBYTE)xmlSecBufferGetData(in),
-                inSize,
+                (ULONG)inSize,
                 0);
             if(status != STATUS_SUCCESS) {
                 xmlSecMSCngNtError("BCryptHashData", xmlSecTransformGetName(transform), status);

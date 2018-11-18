@@ -629,7 +629,7 @@ xmlSecReplaceNodeBufferAndReturn(xmlNodePtr node, const xmlSecByte *buffer, xmlS
     xmlSecAssert2(node->parent != NULL, -1);
 
     /* parse buffer in the context of node's parent */
-    ret = xmlParseInNodeContext(node->parent, (const char*)buffer, size, XML_PARSE_NODICT, &results);
+    ret = xmlParseInNodeContext(node->parent, (const char*)buffer, (int)size, XML_PARSE_NODICT, &results);
     if(ret != XML_ERR_OK) {
         xmlSecXmlError("xmlParseInNodeContext", NULL);
         return(-1);
@@ -908,7 +908,7 @@ xmlSecGetQName(xmlNodePtr node, const xmlChar* href, const xmlChar* local) {
             return(NULL);
         }
 
-        ret = xmlStrPrintf(qname, len, "%s:%s", ns->prefix, local);
+        ret = xmlStrPrintf(qname, (int)len, "%s:%s", ns->prefix, local);
         if(ret < 0) {
             xmlSecXmlError("xmlStrPrintf", NULL);
             xmlFree(qname);

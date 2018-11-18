@@ -13,7 +13,7 @@
  * @Stability: Stable
  *
  *
- * [KeyInfo](https://www.w3.org/TR/xmldsig-core/#sec-KeyInfo) is an 
+ * [KeyInfo](https://www.w3.org/TR/xmldsig-core/#sec-KeyInfo) is an
  * optional element that enables the recipient(s) to obtain
  * the key needed to validate the signature.  KeyInfo may contain keys,
  * names, certificates and other public key management information, such as
@@ -686,9 +686,9 @@ xmlSecKeyDataNameXmlRead(xmlSecKeyDataId id, xmlSecKeyPtr key, xmlNodePtr node, 
             if(ret < 0) {
                 xmlSecInternalError("xmlSecKeySetName",
                                     xmlSecKeyDataKlassGetName(id));
-                xmlFree(newName);   
+                xmlFree(newName);
                 return(-1);
-            } 
+            }
         }
         /* TODO: record the key names we tried */
     } else {
@@ -1177,7 +1177,7 @@ xmlSecKeyDataRetrievalMethodReadXmlResult(xmlSecKeyDataId typeId, xmlSecKeyPtr k
     xmlSecAssert2(keyInfoCtx != NULL, -1);
     xmlSecAssert2(keyInfoCtx->mode == xmlSecKeyInfoModeRead, -1);
 
-    doc = xmlRecoverMemory((const char*)buffer, bufferSize);
+    doc = xmlRecoverMemory((const char*)buffer, (int)bufferSize);
     if(doc == NULL) {
         xmlSecXmlError("xmlRecoverMemory", xmlSecKeyDataKlassGetName(typeId));
         return(-1);
