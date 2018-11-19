@@ -546,14 +546,10 @@ struct _xmlSecCryptoDLFunctions {
  * function pointer.
  */
 #define XMLSEC_PTR_TO_FUNC_IMPL(func_type) \
-    union xmlSecPtrToFuncUnion_ ##func_type { \
-        void *ptr; \
-        func_type * func; \
-    } ; \
     static func_type * xmlSecPtrToFunc_ ##func_type(void * ptr) { \
-         union xmlSecPtrToFuncUnion_ ##func_type x; \
-         x.ptr = ptr; \
-         return (x.func); \
+         void **tmp_ptr = &ptr; \
+         func_type **tmp_func_ptr = (func_type **)tmp_ptr; \
+         return *tmp_func_ptr; \
     }
 
 /**
@@ -574,14 +570,10 @@ struct _xmlSecCryptoDLFunctions {
  * "void *" pointer;
  */
 #define XMLSEC_FUNC_TO_PTR_IMPL(func_type) \
-    union xmlSecFuncToPtrUnion_ ##func_type { \
-        void *ptr; \
-        func_type * func; \
-    } ; \
     static void * xmlSecFuncToPtr_ ##func_type(func_type * func) { \
-         union xmlSecFuncToPtrUnion_ ##func_type x; \
-         x.func = func; \
-         return (x.ptr); \
+        func_type **tmp_func_ptr = &func; \
+        void **tmp_ptr = (void **)tmp_func_ptr; \
+        return *tmp_ptr; \
     }
 
 /**

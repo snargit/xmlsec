@@ -155,12 +155,11 @@ xmlSecCryptoDLLibraryCreate(const xmlChar* name) {
         return(NULL);
     }
 
-    getFunctions = XMLSEC_PTR_TO_FUNC(xmlSecCryptoGetFunctionsCallback,
+    getFunctions = (xmlSecCryptoGetFunctionsCallback *)
                         GetProcAddress(
                             lib->handle,
                             (const char*)lib->getFunctionsName
-                        )
-                    );
+                        );
     if(getFunctions == NULL) {
         xmlSecIOError("GetProcAddressA", lib->getFunctionsName, NULL);
         xmlSecCryptoDLLibraryDestroy(lib);
