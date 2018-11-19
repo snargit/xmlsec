@@ -389,7 +389,11 @@ xmlSecPtrListDebugDump(xmlSecPtrListPtr list, FILE* output) {
     xmlSecAssert(xmlSecPtrListIsValid(list));
     xmlSecAssert(output != NULL);
 
+#if (defined(_WIN64) || defined(__LP64__))
+    fprintf(output, "=== list size: %lld\n", list->use);
+#else
     fprintf(output, "=== list size: %d\n", list->use);
+#endif
     if(list->id->debugDumpItem != NULL) {
         xmlSecSize pos;
 
@@ -414,7 +418,11 @@ xmlSecPtrListDebugXmlDump(xmlSecPtrListPtr list, FILE* output) {
     xmlSecAssert(xmlSecPtrListIsValid(list));
     xmlSecAssert(output != NULL);
 
+#if (defined(_WIN64) || defined(__LP64__))
+    fprintf(output, "<List size=\"%lld\">\n", list->use);
+#else
     fprintf(output, "<List size=\"%d\">\n", list->use);
+#endif
     if(list->id->debugXmlDumpItem != NULL) {
         xmlSecSize pos;
 

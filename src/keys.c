@@ -460,7 +460,11 @@ xmlSecKeyReqDebugDump(xmlSecKeyReqPtr keyReq, FILE* output) {
                 BAD_CAST "NULL");
     fprintf(output, "==== keyType: 0x%08x\n", keyReq->keyType);
     fprintf(output, "==== keyUsage: 0x%08x\n", keyReq->keyUsage);
+#if (defined(_WIN64) || defined(__LP64__))
+    fprintf(output, "==== keyBitsSize: %lld\n", keyReq->keyBitsSize);
+#else
     fprintf(output, "==== keyBitsSize: %d\n", keyReq->keyBitsSize);
+#endif
     xmlSecPtrListDebugDump(&(keyReq->keyUseWithList), output);
 }
 
@@ -484,7 +488,11 @@ xmlSecKeyReqDebugXmlDump(xmlSecKeyReqPtr keyReq, FILE* output) {
 
     fprintf(output, "<KeyType>0x%08x</KeyType>\n", keyReq->keyType);
     fprintf(output, "<KeyUsage>0x%08x</KeyUsage>\n", keyReq->keyUsage);
+#if (defined(_WIN64) || defined(__LP64__))
+    fprintf(output, "<KeyBitsSize>%lld</KeyBitsSize>\n", keyReq->keyBitsSize);
+#else
     fprintf(output, "<KeyBitsSize>%d</KeyBitsSize>\n", keyReq->keyBitsSize);
+#endif
     xmlSecPtrListDebugXmlDump(&(keyReq->keyUseWithList), output);
     fprintf(output, "</KeyReq>\n");
 }

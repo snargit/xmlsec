@@ -871,8 +871,13 @@ xmlSecKeyDataBinaryValueDebugDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(buffer != NULL);
 
     /* print only size, everything else is sensitive */
+#if (defined(_WIN64) || defined(__LP64__))
+    fprintf(output, "=== %s: size=%lld\n", data->id->dataNodeName,
+                                           xmlSecKeyDataGetSize(data));
+#else
     fprintf(output, "=== %s: size=%d\n", data->id->dataNodeName,
                                          xmlSecKeyDataGetSize(data));
+#endif
 }
 
 /**
@@ -895,8 +900,13 @@ xmlSecKeyDataBinaryValueDebugXmlDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(buffer != NULL);
 
     /* print only size, everything else is sensitive */
+#if (defined(_WIN64) || defined(__LP64__))
+    fprintf(output, "<%s size=\"%lld\" />\n", data->id->dataNodeName,
+                                              xmlSecKeyDataGetSize(data));
+#else
     fprintf(output, "<%s size=\"%d\" />\n", data->id->dataNodeName,
                                             xmlSecKeyDataGetSize(data));
+#endif
 }
 
 /**
