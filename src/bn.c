@@ -758,7 +758,7 @@ xmlSecBnCompareReverse(xmlSecBnPtr bn, const xmlSecByte* data, xmlSecSize dataSi
 /**
  * xmlSecBnGetNodeValue:
  * @bn:         the pointer to BN.
- * @cur:        the poitner to an XML node.
+ * @cur:        the pointer to an XML node.
  * @format:     the BN format.
  * @reverse:    if set then reverse read buffer after reading.
  *
@@ -825,7 +825,7 @@ xmlSecBnGetNodeValue(xmlSecBnPtr bn, xmlNodePtr cur, xmlSecBnFormat format, int 
 /**
  * xmlSecBnSetNodeValue:
  * @bn:                 the pointer to BN.
- * @cur:                the poitner to an XML node.
+ * @cur:                the pointer to an XML node.
  * @format:             the BN format.
  * @reverse:            the flag that indicates whether to reverse the buffer before writing.
  * @addLineBreaks:      the flag; it is equal to 1 then linebreaks will be added before and after new buffer content.
@@ -895,7 +895,7 @@ xmlSecBnSetNodeValue(xmlSecBnPtr bn, xmlNodePtr cur, xmlSecBnFormat format, int 
  * xmlSecBnBlobSetNodeValue:
  * @data:       the pointer to BN blob.
  * @dataSize:   the size of BN blob.
- * @cur:        the poitner to an XML node.
+ * @cur:        the pointer to an XML node.
  * @format:     the BN format.
  * @reverse:    the flag that indicates whether to reverse the buffer before writing.
  * @addLineBreaks:  if the flag is equal to 1 then

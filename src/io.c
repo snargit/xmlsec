@@ -181,7 +181,7 @@ xmlSecIOInit(void) {
 /**
  * xmlSecIOShutdown:
  *
- * The IO clenaup (called from #xmlSecShutdown function).
+ * The IO cleanup (called from #xmlSecShutdown function).
  * Applications should not call this function directly.
  */
 void
@@ -420,7 +420,7 @@ xmlSecTransformInputURIOpen(xmlSecTransformPtr transform, const xmlChar *uri) {
  * xmlSecTransformInputURIClose:
  * @transform:          the pointer to IO transform.
  *
- * Closes the given @transform and frees up resourses.
+ * Closes the given @transform and frees up resources.
  *
  * Returns: 0 on success or a negative value otherwise.
  */
