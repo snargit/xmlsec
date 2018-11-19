@@ -217,7 +217,14 @@ xmlSecKWDes3Decode(xmlSecKWDes3Id kwDes3Id, void *context,
     }
 
     /* check sha1 */
+#ifdef _MSC_VER
+#pragma warning(push)
+#pragma warning(disable : 4127)
+#endif
     xmlSecAssert2(XMLSEC_KW_DES3_BLOCK_LENGTH <= sizeof(sha1), -1);
+#ifdef _MSC_VER
+#pragma warning(pop)
+#endif
     if(memcmp(sha1, out + s, XMLSEC_KW_DES3_BLOCK_LENGTH) != 0) {
         xmlSecInvalidDataError("SHA1 does not match", NULL);
         xmlSecBufferDestroy(tmp);

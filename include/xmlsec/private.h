@@ -533,9 +533,6 @@ struct _xmlSecCryptoDLFunctions {
  *     warning: ISO C forbids conversion of object pointer to function
  *     pointer type
  *
- * The workaround is to declare a union that does the conversion. This is
- * guaranteed (ISO/IEC 9899:1990 "C89"/"C90") to match exactly.
- *
  ***********************************************************************/
 
 /**
