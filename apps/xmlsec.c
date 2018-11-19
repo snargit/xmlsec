@@ -968,7 +968,7 @@ const char* xmlsec_crypto = NULL;
 const char* tmp = NULL;
 const char** utf8_argv = NULL; /* TODO: this should be xmlChar** but it will break things downstream */
 
-#if defined(WIN32) && defined(UNICODE)
+#if defined(_WIN32) && defined(UNICODE)
 int wmain(int argc, wchar_t *argv[ ], wchar_t *envp[ ]) {
     UNREFERENCED_PARAMETER(envp);
 
@@ -980,7 +980,7 @@ int main(int argc, const char **argv) {
     int pos, i;
     int res = 1;
 
-#if defined(WIN32)
+#if defined(_WIN32)
     /* convert command line to UTF8 from locale or UNICODE */
     utf8_argv = (char**)xmlMalloc(sizeof(char*) * argc);
     if(utf8_argv == NULL) {

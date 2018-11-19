@@ -939,7 +939,7 @@ xmlSecTransformCtxBinaryExecute(xmlSecTransformCtxPtr ctx,
     ret = xmlSecTransformPushBin(ctx->first, data, dataSize, 1, ctx);
     if(ret < 0) {
         xmlSecInternalError2("xmlSecTransformPushBin", NULL,
-                             "dataSize=%d", dataSize);
+                             "dataSize=%d", (int)dataSize);
         return(-1);
     }
 
@@ -1912,7 +1912,7 @@ xmlSecTransformDefaultPushBin(xmlSecTransformPtr transform, const xmlSecByte* da
             if(ret < 0) {
                 xmlSecInternalError2("xmlSecBufferAppend",
                                      xmlSecTransformGetName(transform),
-                                     "size=%d", chunkSize);
+                                     "size=%d", (int)chunkSize);
                 return(-1);
             }
 
@@ -1951,7 +1951,7 @@ xmlSecTransformDefaultPushBin(xmlSecTransformPtr transform, const xmlSecByte* da
             if(ret < 0) {
                 xmlSecInternalError3("xmlSecTransformPushBin",
                                      xmlSecTransformGetName(transform->next),
-                                     "final=%d;outSize=%d", final, outSize);
+                                     "final=%d;outSize=%d", final, (int)outSize);
                 return(-1);
             }
         }
@@ -1962,7 +1962,7 @@ xmlSecTransformDefaultPushBin(xmlSecTransformPtr transform, const xmlSecByte* da
             if(ret < 0) {
                 xmlSecInternalError2("xmlSecBufferRemoveHead",
                                      xmlSecTransformGetName(transform),
-                                     "size=%d", outSize);
+                                     "size=%d", (int)outSize);
                 return(-1);
             }
         }
@@ -2011,7 +2011,7 @@ xmlSecTransformDefaultPopBin(xmlSecTransformPtr transform, xmlSecByte* data,
             if(ret < 0) {
                 xmlSecInternalError2("xmlSecBufferSetMaxSize",
                                      xmlSecTransformGetName(transform),
-                                     "size=%d", inSize + chunkSize);
+                                     "size=%d", (int)(inSize + chunkSize));
                 return(-1);
             }
 
@@ -2031,7 +2031,7 @@ xmlSecTransformDefaultPopBin(xmlSecTransformPtr transform, xmlSecByte* data,
                 if(ret < 0) {
                     xmlSecInternalError2("xmlSecBufferSetSize",
                                          xmlSecTransformGetName(transform),
-                                         "size=%d", inSize + chunkSize);
+                                         "size=%d", (int)(inSize + chunkSize));
                     return(-1);
                 }
                 final = 0; /* the previous transform returned some data..*/
@@ -2070,7 +2070,7 @@ xmlSecTransformDefaultPopBin(xmlSecTransformPtr transform, xmlSecByte* data,
         if(ret < 0) {
             xmlSecInternalError2("xmlSecBufferRemoveHead",
                                  xmlSecTransformGetName(transform),
-                                 "size=%d", outSize);
+                                 "size=%d", (int)outSize);
             return(-1);
         }
     }

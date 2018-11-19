@@ -1013,7 +1013,7 @@ xmlSecKeyGenerate(xmlSecKeyDataId dataId, xmlSecSize sizeBits, xmlSecKeyDataType
     if(ret < 0) {
         xmlSecInternalError3("xmlSecKeyDataGenerate",
                              xmlSecKeyDataKlassGetName(dataId),
-                             "size=%d;type=%d", sizeBits, type);
+                             "size=%d;type=%d", (int)sizeBits, type);
         xmlSecKeyDataDestroy(data);
         return(NULL);
     }

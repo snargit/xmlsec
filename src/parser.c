@@ -475,7 +475,7 @@ xmlSecParseMemoryExt(const xmlSecByte *prefix, xmlSecSize prefixSize,
         ret = xmlParseChunk(ctxt, (const char*)prefix, (int)prefixSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctxt, NULL,
-                                  "chunkSize=%d", prefixSize);
+                                  "chunkSize=%d", (int)prefixSize);
 
             goto done;
         }
@@ -486,7 +486,7 @@ xmlSecParseMemoryExt(const xmlSecByte *prefix, xmlSecSize prefixSize,
         ret = xmlParseChunk(ctxt, (const char*)buffer, (int)bufferSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctxt, NULL,
-                                  "chunkSize=%d", bufferSize);
+                                  "chunkSize=%d", (int)bufferSize);
 
             goto done;
         }
@@ -497,7 +497,7 @@ xmlSecParseMemoryExt(const xmlSecByte *prefix, xmlSecSize prefixSize,
         ret = xmlParseChunk(ctxt, (const char*)postfix, (int)postfixSize, 0);
         if(ret != 0) {
             xmlSecXmlParserError2("xmlParseChunk", ctxt, NULL,
-                                  "chunkSize=%d", postfixSize);
+                                  "chunkSize=%d", (int)postfixSize);
 
             goto done;
         }

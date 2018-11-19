@@ -203,7 +203,7 @@ xmlSecBnFromString(xmlSecBnPtr bn, const xmlChar* str, xmlSecSize base) {
      */
     ret = xmlSecBufferSetMaxSize(bn, xmlSecBufferGetSize(bn) + len / 2 + 1 + 1);
     if(ret < 0) {
-        xmlSecInternalError2("xmlSecBufferSetMaxSize", NULL, "size=%d", len / 2 + 1);
+        xmlSecInternalError2("xmlSecBufferSetMaxSize", NULL, "size=%d", (int)(len / 2 + 1));
         return (-1);
     }
 
@@ -249,13 +249,13 @@ xmlSecBnFromString(xmlSecBnPtr bn, const xmlChar* str, xmlSecSize base) {
 
         ret = xmlSecBnMul(bn, (int)base);
         if(ret < 0) {
-            xmlSecInternalError2("xmlSecBnMul", NULL, "base=%d", base);
+            xmlSecInternalError2("xmlSecBnMul", NULL, "base=%d", (int)base);
             return (-1);
         }
 
         ret = xmlSecBnAdd(bn, nn);
         if(ret < 0) {
-            xmlSecInternalError2("xmlSecBnAdd", NULL, "base=%d", base);
+            xmlSecInternalError2("xmlSecBnAdd", NULL, "base=%d", (int)base);
             return (-1);
         }
     }
@@ -267,7 +267,7 @@ xmlSecBnFromString(xmlSecBnPtr bn, const xmlChar* str, xmlSecSize base) {
         ch = 0;
         ret = xmlSecBufferPrepend(bn, &ch, 1);
         if(ret < 0) {
-            xmlSecInternalError2("xmlSecBufferPrepend", NULL, "base=%d", base);
+            xmlSecInternalError2("xmlSecBufferPrepend", NULL, "base=%d", (int)base);
             return (-1);
         }
     }
@@ -282,7 +282,7 @@ xmlSecBnFromString(xmlSecBnPtr bn, const xmlChar* str, xmlSecSize base) {
 
         ret = xmlSecBnAdd(bn, 1);
         if(ret < 0) {
-            xmlSecInternalError2("xmlSecBnAdd", NULL, "base=%d", base);
+            xmlSecInternalError2("xmlSecBnAdd", NULL, "base=%d", (int)base);
             return (-1);
         }
     }
@@ -321,13 +321,13 @@ xmlSecBnToString(xmlSecBnPtr bn, xmlSecSize base) {
     size = xmlSecBufferGetSize(bn);
     ret = xmlSecBnInitialize(&bn2, size);
     if(ret < 0) {
-        xmlSecInternalError2("xmlSecBnInitialize", NULL, "size=%d", size);
+        xmlSecInternalError2("xmlSecBnInitialize", NULL, "size=%d", (int)size);
         return (NULL);
     }
 
     ret = xmlSecBnSetData(&bn2, data, size);
     if(ret < 0) {
-        xmlSecInternalError2("xmlSecBnSetData", NULL, "size=%d", size);
+        xmlSecInternalError2("xmlSecBnSetData", NULL, "size=%d", (int)size);
         xmlSecBnFinalize(&bn2);
         return (NULL);
     }
@@ -339,7 +339,7 @@ xmlSecBnToString(xmlSecBnPtr bn, xmlSecSize base) {
         /* subtract 1 and do 2's compliment */
         ret = xmlSecBnAdd(&bn2, -1);
         if(ret < 0) {
-            xmlSecInternalError2("xmlSecBnAdd", NULL, "size=%d", size);
+            xmlSecInternalError2("xmlSecBnAdd", NULL, "size=%d", (int)size);
             xmlSecBnFinalize(&bn2);
             return (NULL);
         }
@@ -368,7 +368,7 @@ xmlSecBnToString(xmlSecBnPtr bn, xmlSecSize base) {
 
     for(i = 0; (xmlSecBufferGetSize(&bn2) > 0) && (i < len); i++) {
         if(xmlSecBnDiv(&bn2, (int)base, &nn) < 0) {
-            xmlSecInternalError2("xmlSecBnDiv", NULL, "base=%d", base);
+            xmlSecInternalError2("xmlSecBnDiv", NULL, "base=%d", (int)base);
             xmlFree(res);
             xmlSecBnFinalize(&bn2);
             return (NULL);
@@ -551,7 +551,7 @@ xmlSecBnDiv(xmlSecBnPtr bn, int divider, int* mod) {
     if(i > 0) {
         ret = xmlSecBufferRemoveHead(bn, i);
         if(ret < 0) {
-            xmlSecInternalError2("xmlSecBufferRemoveHead", NULL, "size=%d", i);
+            xmlSecInternalError2("xmlSecBufferRemoveHead", NULL, "size=%d", (int)i);
             return (-1);
         }
     }

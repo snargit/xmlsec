@@ -291,7 +291,7 @@ xmlSecBase64CtxFinal(xmlSecBase64CtxPtr ctx,
     if(ctx->encode != 0) {
         ret = xmlSecBase64CtxEncodeFinal(ctx, out, outSize, &outResSize);
         if(ret < 0) {
-            xmlSecInternalError2("xmlSecBase64CtxEncodeFinal", NULL, "outSize=%d", outSize);
+            xmlSecInternalError2("xmlSecBase64CtxEncodeFinal", NULL, "outSize=%d", (int)outSize);
             return(-1);
         }
     } else {
@@ -844,7 +844,7 @@ xmlSecBase64Execute(xmlSecTransformPtr transform, int last, xmlSecTransformCtxPt
                 if(ret < 0) {
                     xmlSecInternalError2("xmlSecBufferSetMaxSize",
                                          xmlSecTransformGetName(transform),
-                                         "size=%d", outSize + outLen);
+                                         "size=%d", (int)(outSize + outLen));
                     return(-1);
                 }
 
@@ -864,7 +864,7 @@ xmlSecBase64Execute(xmlSecTransformPtr transform, int last, xmlSecTransformCtxPt
                 if(ret < 0) {
                     xmlSecInternalError2("xmlSecBufferSetSize",
                                          xmlSecTransformGetName(transform),
-                                         "size=%d", outSize + outLen);
+                                         "size=%d", (int)(outSize + outLen));
                     return(-1);
                 }
 
@@ -873,7 +873,7 @@ xmlSecBase64Execute(xmlSecTransformPtr transform, int last, xmlSecTransformCtxPt
                 if(ret < 0) {
                     xmlSecInternalError2("xmlSecBufferRemoveHead",
                                          xmlSecTransformGetName(transform),
-                                         "size=%d", inSize);
+                                         "size=%d", (int)inSize);
                     return(-1);
                 }
             }
@@ -885,7 +885,7 @@ xmlSecBase64Execute(xmlSecTransformPtr transform, int last, xmlSecTransformCtxPt
                 if(ret < 0) {
                     xmlSecInternalError2("xmlSecBufferSetMaxSize",
                                          xmlSecTransformGetName(transform),
-                                         "size=%d", outSize + 16);
+                                         "size=%d", (int)(outSize + 16));
                     return(-1);
                 }
 
@@ -903,7 +903,7 @@ xmlSecBase64Execute(xmlSecTransformPtr transform, int last, xmlSecTransformCtxPt
                 if(ret < 0) {
                     xmlSecInternalError2("xmlSecBufferSetSize",
                                          xmlSecTransformGetName(transform),
-                                         "size=%d", outSize + outLen);
+                                         "size=%d", (int)(outSize + outLen));
                     return(-1);
                 }
                 transform->status = xmlSecTransformStatusFinished;

@@ -300,7 +300,7 @@ xmlSecEncCtxBinaryEncrypt(xmlSecEncCtxPtr encCtx, xmlNodePtr tmpl,
     ret = xmlSecTransformCtxBinaryExecute(&(encCtx->transformCtx), data, dataSize);
     if(ret < 0) {
         xmlSecInternalError2("xmlSecTransformCtxBinaryExecute", NULL,
-                             "dataSize=%d", dataSize);
+                             "dataSize=%d", (int)dataSize);
         return(-1);
     }
 

@@ -185,7 +185,7 @@ xmlSecPtrListCopy(xmlSecPtrListPtr dst, xmlSecPtrListPtr src) {
     if(ret < 0) {
         xmlSecInternalError2("xmlSecPtrListEnsureSize",
                              xmlSecPtrListGetName(src),
-                             "size=%d", src->use);
+                             "size=%d", (int)(src->use));
         return(-1);
     }
 
@@ -294,7 +294,7 @@ xmlSecPtrListAdd(xmlSecPtrListPtr list, xmlSecPtr item) {
     if(ret < 0) {
         xmlSecInternalError2("xmlSecPtrListEnsureSize",
                              xmlSecPtrListGetName(list),
-                             "size=%d", list->use + 1);
+                             "size=%d", (int)(list->use + 1));
         return(-1);
     }
 

@@ -12,7 +12,7 @@
  * @Short_description: XPath transform implementation.
  * @Stability: Private
  *
- * 
+ *
  */
 
 #include "globals.h"
@@ -318,7 +318,7 @@ xmlSecXPathDataListExecute(xmlSecPtrListPtr dataList, xmlDocPtr doc,
     for(pos = 0; pos < xmlSecPtrListGetSize(dataList); ++pos) {
         data = (xmlSecXPathDataPtr)xmlSecPtrListGetItem(dataList, pos);
         if(data == NULL) {
-            xmlSecInternalError2("xmlSecPtrListGetItem", NULL, "pos=%d", pos);
+            xmlSecInternalError2("xmlSecPtrListGetItem", NULL, "pos=%d", (int)pos);
             if((res != NULL) && (res != nodes)) {
                 xmlSecNodeSetDestroy(res);
             }

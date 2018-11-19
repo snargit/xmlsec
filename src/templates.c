@@ -1505,7 +1505,7 @@ xmlSecTmplTransformAddRsaOaepParam(xmlNodePtr transformNode,
 
     base64 = xmlSecBase64Encode(buf, size, 0);
     if(base64 == NULL) {
-        xmlSecInternalError2("xmlSecBase64Encode", NULL, "size=%d", size);
+        xmlSecInternalError2("xmlSecBase64Encode", NULL, "size=%d", (int)size);
         return(-1);
     }
 
