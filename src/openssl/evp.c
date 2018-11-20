@@ -1087,7 +1087,7 @@ xmlSecOpenSSLKeyDataDsaDebugDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(output != NULL);
 
     fprintf(output, "=== dsa key: size = %d\n",
-            xmlSecOpenSSLKeyDataDsaGetSize(data));
+            (int)xmlSecOpenSSLKeyDataDsaGetSize(data));
 }
 
 static void
@@ -1096,7 +1096,7 @@ xmlSecOpenSSLKeyDataDsaDebugXmlDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(output != NULL);
 
     fprintf(output, "<DSAKeyValue size=\"%d\" />\n",
-            xmlSecOpenSSLKeyDataDsaGetSize(data));
+            (int)xmlSecOpenSSLKeyDataDsaGetSize(data));
 }
 
 #endif /* XMLSEC_NO_DSA */
@@ -1351,7 +1351,7 @@ xmlSecOpenSSLKeyDataEcdsaDebugDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(output != NULL);
 
     fprintf(output, "=== ecdsa key: size = %d\n",
-            xmlSecOpenSSLKeyDataEcdsaGetSize(data));
+            (int)xmlSecOpenSSLKeyDataEcdsaGetSize(data));
 }
 
 static void
@@ -1360,7 +1360,7 @@ xmlSecOpenSSLKeyDataEcdsaDebugXmlDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(output != NULL);
 
     fprintf(output, "<ECDSAKeyValue size=\"%d\" />\n",
-            xmlSecOpenSSLKeyDataEcdsaGetSize(data));
+            (int)xmlSecOpenSSLKeyDataEcdsaGetSize(data));
 }
 
 #endif /* XMLSEC_NO_ECDSA */
@@ -1913,7 +1913,7 @@ xmlSecOpenSSLKeyDataRsaDebugDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(output != NULL);
 
     fprintf(output, "=== rsa key: size = %d\n",
-            xmlSecOpenSSLKeyDataRsaGetSize(data));
+            (int)xmlSecOpenSSLKeyDataRsaGetSize(data));
 }
 
 static void
@@ -1922,7 +1922,7 @@ xmlSecOpenSSLKeyDataRsaDebugXmlDump(xmlSecKeyDataPtr data, FILE* output) {
     xmlSecAssert(output != NULL);
 
     fprintf(output, "<RSAKeyValue size=\"%d\" />\n",
-            xmlSecOpenSSLKeyDataRsaGetSize(data));
+            (int)xmlSecOpenSSLKeyDataRsaGetSize(data));
 }
 #endif /* XMLSEC_NO_RSA */
 
@@ -2019,7 +2019,7 @@ xmlSecOpenSSLKeyDataGost2001Finalize(xmlSecKeyDataPtr data) {
 
 static xmlSecKeyDataType
 xmlSecOpenSSLKeyDataGost2001GetType(xmlSecKeyDataPtr data) {
-    /* Now I don't know how to find whether we have both private and public key 
+    /* Now I don't know how to find whether we have both private and public key
     or the public only*/
     return(xmlSecKeyDataTypePublic | xmlSecKeyDataTypePrivate);
 }

@@ -40,14 +40,14 @@
  * AES KW implementation
  *
  *********************************************************************/
-static int        xmlSecOpenSSLKWAesBlockEncrypt                (const xmlSecByte * in, 
+static int        xmlSecOpenSSLKWAesBlockEncrypt                (const xmlSecByte * in,
                                                                  xmlSecSize inSize,
-                                                                 xmlSecByte * out, 
+                                                                 xmlSecByte * out,
                                                                  xmlSecSize outSize,
                                                                  void * context);
-static int        xmlSecOpenSSLKWAesBlockDecrypt                (const xmlSecByte * in, 
+static int        xmlSecOpenSSLKWAesBlockDecrypt                (const xmlSecByte * in,
                                                                  xmlSecSize inSize,
-                                                                 xmlSecByte * out, 
+                                                                 xmlSecByte * out,
                                                                  xmlSecSize outSize,
                                                                  void * context);
 static xmlSecKWAesKlass xmlSecOpenSSLKWAesKlass = {
@@ -192,7 +192,7 @@ xmlSecOpenSSLKWAesSetKey(xmlSecTransformPtr transform, xmlSecKeyPtr key) {
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferSetData",
                              xmlSecTransformGetName(transform),
-                             "size=%d", ctx->keyExpectedSize);
+                             "size=%d", (int)(ctx->keyExpectedSize));
         return(-1);
     }
 
@@ -249,7 +249,7 @@ xmlSecOpenSSLKWAesExecute(xmlSecTransformPtr transform, int last, xmlSecTransfor
         if(ret < 0) {
             xmlSecInternalError2("xmlSecBufferSetMaxSize",
                                  xmlSecTransformGetName(transform),
-                                 "size=%d", outSize);
+                                 "size=%d", (int)outSize);
             return(-1);
         }
 
@@ -299,7 +299,7 @@ xmlSecOpenSSLKWAesExecute(xmlSecTransformPtr transform, int last, xmlSecTransfor
         if(ret < 0) {
             xmlSecInternalError2("xmlSecBufferSetSize",
                                  xmlSecTransformGetName(transform),
-                                 "size=%d", outSize);
+                                 "size=%d", (int)outSize);
             return(-1);
         }
 
@@ -307,7 +307,7 @@ xmlSecOpenSSLKWAesExecute(xmlSecTransformPtr transform, int last, xmlSecTransfor
         if(ret < 0) {
             xmlSecInternalError2("xmlSecBufferRemoveHead",
                                  xmlSecTransformGetName(transform),
-                                  "size=%d", inSize);
+                                  "size=%d", (int)inSize);
             return(-1);
         }
 

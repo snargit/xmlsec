@@ -118,7 +118,7 @@ xmlSecOpenSSLNodeSetBNValue(xmlNodePtr cur, const BIGNUM *a, int addLineBreaks) 
     ret = xmlSecBufferSetSize(&buf, size);
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferSetSize", NULL,
-                             "size=%d", size);
+                             "size=%d", (int)size);
         xmlSecBufferFinalize(&buf);
         return(-1);
     }

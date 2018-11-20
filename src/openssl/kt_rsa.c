@@ -324,7 +324,7 @@ xmlSecOpenSSLRsaPkcs1Process(xmlSecTransformPtr transform, xmlSecTransformCtxPtr
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferSetMaxSize",
                              xmlSecTransformGetName(transform),
-                             "size=%d", outSize);
+                             "size=%d", (int)outSize);
         return(-1);
     }
 
@@ -356,7 +356,7 @@ xmlSecOpenSSLRsaPkcs1Process(xmlSecTransformPtr transform, xmlSecTransformCtxPtr
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferSetSize",
                              xmlSecTransformGetName(transform),
-                             "size=%d", outSize);
+                             "size=%d", (int)outSize);
         return(-1);
     }
 
@@ -364,7 +364,7 @@ xmlSecOpenSSLRsaPkcs1Process(xmlSecTransformPtr transform, xmlSecTransformCtxPtr
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferRemoveHead",
                              xmlSecTransformGetName(transform),
-                             "size=%d", inSize);
+                             "size=%d", (int)inSize);
         return(-1);
     }
 
@@ -693,7 +693,7 @@ xmlSecOpenSSLRsaOaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxPtr 
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferSetMaxSize",
                              xmlSecTransformGetName(transform),
-                             "size=%d", outSize);
+                             "size=%d", (int)outSize);
         return(-1);
     }
 
@@ -719,7 +719,7 @@ xmlSecOpenSSLRsaOaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxPtr 
         if(ret < 0) {
             xmlSecInternalError2("xmlSecBufferInitialize",
                                  xmlSecTransformGetName(transform),
-                                 "size=%d", keySize);
+                                 "size=%d", (int)keySize);
             return(-1);
         }
 
@@ -769,7 +769,7 @@ xmlSecOpenSSLRsaOaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxPtr 
         }
         outSize = ret;
 
-#ifndef OPENSSL_IS_BORINGSSL 
+#ifndef OPENSSL_IS_BORINGSSL
         /*
          * the private decrypt w/o padding adds '0's at the beginning.
          * it's not clear for me can I simply skip all '0's from the
@@ -825,7 +825,7 @@ xmlSecOpenSSLRsaOaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxPtr 
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferSetSize",
                 xmlSecTransformGetName(transform),
-                "size=%d", outSize);
+                "size=%d", (int)outSize);
         return(-1);
     }
 
@@ -833,7 +833,7 @@ xmlSecOpenSSLRsaOaepProcess(xmlSecTransformPtr transform, xmlSecTransformCtxPtr 
     if(ret < 0) {
         xmlSecInternalError2("xmlSecBufferRemoveHead",
                              xmlSecTransformGetName(transform),
-                             "size=%d", inSize);
+                             "size=%d", (int)inSize);
         return(-1);
     }
 

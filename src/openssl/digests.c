@@ -335,7 +335,7 @@ xmlSecOpenSSLEvpDigestExecute(xmlSecTransformPtr transform, int last, xmlSecTran
             if(ret < 0) {
                 xmlSecInternalError2("xmlSecBufferRemoveHead",
                                      xmlSecTransformGetName(transform),
-                                     "size=%d", inSize);
+                                     "size=%d", (int)inSize);
                 return(-1);
             }
         }
@@ -359,7 +359,7 @@ xmlSecOpenSSLEvpDigestExecute(xmlSecTransformPtr transform, int last, xmlSecTran
                 if(ret < 0) {
                     xmlSecInternalError2("xmlSecBufferAppend",
                                          xmlSecTransformGetName(transform),
-                                         "size=%d", ctx->dgstSize);
+                                         "size=%d", (int)(ctx->dgstSize));
                     return(-1);
                 }
             }
