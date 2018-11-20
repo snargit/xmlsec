@@ -442,8 +442,6 @@ XMLSEC_EXPORT const char*       xmlSecErrorsGetMsg              (xmlSecSize pos)
 #define XMLSEC_ERRORS_PRINTF_ATTRIBUTE
 #endif /* __GNUC__ */
 
-XMLSEC_EXPORT const char *xmlSecNullStr;
-
 /**
  * xmlSecErrorsSafeString:
  * @str:                the string.
@@ -454,11 +452,11 @@ XMLSEC_EXPORT const char *xmlSecNullStr;
 #define xmlSecErrorsSafeString(str) \
 __pragma(warning(push)) \
 __pragma(warning(disable: 4130)) \
-        (((str) != NULL) ? ((const char*)(str)) : xmlSecNullStr) \
+        (((str) != NULL) ? ((const char*)(str)) : (const char *)"NULL") \
 __pragma(warning(pop))
 #else
 #define xmlSecErrorsSafeString(str) \
-        (((str) != NULL) ? ((const char*)(str)) : xmlSecNullStr)
+        (((str) != NULL) ? ((const char*)(str)) : (const char *)"NULL")
 #endif
 
 /**

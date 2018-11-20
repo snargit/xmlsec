@@ -356,7 +356,6 @@ CFLAGS 			= $(CFLAGS) /nologo /D "WIN32" /D "_WINDOWS" /D inline=__inline
 # C4130: '!=': logical operation on address of string constant:
 #     this generates a false warning inside macros
 CFLAGS 			= $(CFLAGS) /D "_MBCS" /D "_REENTRANT"  /W4
-#CFLAGS          = $(CFLAGS) /wd4130
 
 !if "$(WERROR)" == "1"
 CFLAGS 			= $(CFLAGS) /WX
@@ -369,7 +368,7 @@ CFLAGS 			= $(CFLAGS) /D "HAVE_STDIO_H" /D "HAVE_STDLIB_H"
 CFLAGS 			= $(CFLAGS) /D "HAVE_STRING_H" /D "HAVE_CTYPE_H"
 CFLAGS 			= $(CFLAGS) /D "HAVE_MALLOC_H" /D "HAVE_MEMORY_H"
 CFLAGS 			= $(CFLAGS) /D "XMLSEC_NO_GOST" /D "XMLSEC_NO_GOST2012"
-CFLAGS          = $(CFLAGS) /D "XMLSEC_NO_SIZE_T"
+CFLAGS			= $(CFLAGS) /D "XMLSEC_NO_SIZE_T"
 
 
 !if "$(UNICODE)" == "1"
@@ -417,7 +416,7 @@ XMLSEC_MSCNG_CFLAGS     = /D "XMLSEC_CRYPTO_MSCNG" /D "XMLSEC_DEFAULT_CRYPTO=\"m
 #
 LD 				= link.exe
 LDFLAGS 		= /nologo /debug
-LDFLAGS 		= $(LDFLAGS) /LIBPATH:$(BINDIR) /LIBPATH:$(LIBPREFIX)
+LDFLAGS 		= $(LDFLAGS) /LIBPATH:$(BINDIR)
 LIBS 			=
 
 # Optimisation and debug symbols.
