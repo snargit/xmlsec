@@ -97,6 +97,8 @@ static xmlSecErrorDescription xmlSecErrorsTable[XMLSEC_ERRORS_MAX_NUMBER + 1] = 
 static xmlSecErrorsCallback xmlSecErrorsClbk = xmlSecErrorsDefaultCallback;
 static int  xmlSecPrintErrorMessages = 1;       /* whether the error messages will be printed immediately */
 
+const char *xmlSecNullStr = "NULL";
+
 /**
  * xmlSecErrorsInit:
  *

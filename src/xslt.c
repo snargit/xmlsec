@@ -221,7 +221,7 @@ xmlSecXsltFinalize(xmlSecTransformPtr transform) {
     if(ctx->parserCtx != NULL) {
         if(ctx->parserCtx->myDoc != NULL) {
             xmlFreeDoc(ctx->parserCtx->myDoc);
-	    ctx->parserCtx->myDoc = NULL;
+        ctx->parserCtx->myDoc = NULL;
         }
         xmlFreeParserCtxt(ctx->parserCtx);
     }
